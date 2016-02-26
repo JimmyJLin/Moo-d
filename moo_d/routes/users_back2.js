@@ -5,7 +5,7 @@ var db = require('./../db/pg');
 
 //new codes
 users.route('/')
-  .get(function(req, res){
+  .get(db.createUser, function(req, res){
     res.redirect('/users/profile')
   })
 
@@ -13,12 +13,6 @@ users.route('/signup')
   .get(function(req, res){
   res.render('users/signup');
 })
-  .post(db.createUser, function(req, res){
-    req.session.user = res.rows;
-    req.session.save(function(){
-      res.redirect(303, '/users/profile')
-    })
-  })
 
 users.route('/profile')
   .get(function(req, res){

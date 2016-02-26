@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>Moo-d</title>
   <%- include ../partials/head %>
 
 </head>
@@ -10,16 +10,14 @@
   <header>
     <%- include ../partials/nav %>
   </header>
-  <div>
-    <a href="/users/signup">Signup</a>
+  <div class="button-template">
+    <a href="/users/signup" class="btn btn-primary">Signup</a>
   </div>
-  <div>
-    <a href="/users/login">Login</a>
+  <div class="button-template">
+    <a href="/users/login" class="btn btn-success">Login</a>
   </div>
-  <br>
-  <div>
+  <div class="button-template">
     <form method="POST" action="/users/logout?_method=DELETE">
-      <br>
       <button>logout</button>
     </form>
   </div>

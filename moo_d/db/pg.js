@@ -52,7 +52,7 @@ function createUser(req, res, next) {
         console.log(err);
         return res.status(500).json({suceess: false, data: err});
       }
-      var query = client.query('INSERT INTO profile( email, password_digest) VALUES ($1, $2) RETURNING profile_id;', [email, hash], function(err, result) {
+      var query = client.query('INSERT INTO profile( email, password_digest) VALUES ($1, $2)', [email, hash], function(err, result) {
         done();
         if(err) {
           return console.error('error running query', err);
