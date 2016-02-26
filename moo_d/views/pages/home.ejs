@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <%- include ../partials/head %>
+
+</head>
+<body>
+  <header>
+    <%- include ../partials/nav %>
+  </header>
+  <div>
+    <a href="/users/signup">Signup</a>
+  </div>
+  <div>
+    <a href="/users/login">Login</a>
+  </div>
+  <br>
+  <div>
+    <form method="POST" action="/users/logout?_method=DELETE">
+      <br>
+      <button>logout</button>
+    </form>
+  </div>
+  <div>
+  </div>
+  <%- include ../partials/footer %>
+
+</body>
+</html>

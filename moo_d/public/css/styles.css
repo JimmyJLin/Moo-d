@@ -1,0 +1,72 @@
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+  text-align: center;
+}
+
+p {
+  font-size: 13px;
+  overflow: hidden;
+}
+
+a:hover .card-outmore {
+  background: #2C3E50;
+  color: #fff;
+}
+
+a:hover .thecard {
+  box-shadow: 0 10px 50px rgba(0,0,0,.6);
+}
+
+.thecard {
+  width: 300px;
+  margin: 2% auto;
+  box-shadow: 0 1px 30px rgba(0,0,0,.4);
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 4px;
+  transition: 400ms ease;
+}
+
+.card-caption {
+  position: relative;
+  background: #ffffff;
+  padding: 15px 15px 5px 5px;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.card-outmore {
+  padding: 10px 25px 10px 25px;
+  border-radius: 0px 0px 4px 4px;
+  border-top: 1px solid #e0e0e0;
+  background: #efefef;
+  color: #222;
+  display: inline-table;
+  width: 250px;
+  transition: 400ms ease;
+}
+.card-outmore h5 {
+  float: left;
+}
+.card-outmore i {
+  float: right;
+}
+
+
+h1 {
+  font-size: 22px;
+}
+
+ul#res {
+  list-style-type: none;
+  padding: 10px;
+}
