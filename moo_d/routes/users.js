@@ -20,9 +20,31 @@ users.route('/signup')
     })
   })
 
+users.route('/showAll')
+  .get(db.showAllProfile, function(req, res){
+    res.render('pages/profileAll', {
+      profileAll: res.rows})
+  })
+
 users.route('/profile')
   .get(function(req, res){
     res.render('users/profile');
+  })
+  .post(db.updateProfile, function(req, res){
+    res.render('pages/profileOne', {
+      profileData: res.rows})
+  })
+
+users.route('/profile/:id/edit', function(req, res){
+  res.render('pages/profileOne', {
+    profileOneData: res.rows})
+    console.log(profileOneData)
+})
+
+users.route('/profile/:id')
+  .get(db.showOneProfile, function(req, res){
+    res.render('pages/profileOne', {
+        profileOneData: res.rows})
   })
 
 users.route('/login')
@@ -32,7 +54,7 @@ users.route('/login')
   .post(db.loginUser, function(req, res){
     req.session.user = res.rows;
     req.session.save(function(){
-      res.redirect('/users/profile')
+      res.redirect('/users/profile') // need to add profile_id when displaying
     })
   })
 

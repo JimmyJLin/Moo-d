@@ -1,0 +1,17 @@
+<% profileAll.forEach(function(profile) { %>
+    <a href="/users/profile/<%= profile.profile_id %>" >
+      <div class="thecard">
+        <div class="card-caption">
+          <ul id="res">
+            <p>
+              <li>ProfileId: <%= profile.profile_id %></li>
+              <li>Name: <%= profile.name %></li>
+              <li>Activity: <%= profile.activity_id %></li>
+              <li>Emotion: <%= profile.emotion_id %></li>
+              <br>
+            </p>
+          </ul>
+        </div>
+      </div>
+    </a>
+  <% }) %>
