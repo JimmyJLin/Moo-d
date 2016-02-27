@@ -44,7 +44,7 @@ function createSecure(email, password, callback) {
 
 function createUser(req, res, next) {
   createSecure(req.body.email, req.body.password, saveUser);
-
+  var name = req.body.name;
   function saveUser(email, hash){
     pg.connect(connectionString, function(err, client, done) {
       if(err) {
@@ -52,7 +52,7 @@ function createUser(req, res, next) {
         console.log(err);
         return res.status(500).json({suceess: false, data: err});
       }
-      var query = client.query('INSERT INTO profile( email, password_digest) VALUES ($1, $2)', [email, hash], function(err, result) {
+      var query = client.query('INSERT INTO profile( email, password_digest, name) VALUES ($1, $2, $3)', [email, hash, name], function(err, result) {
         done();
         if(err) {
           return console.error('error running query', err);
@@ -65,17 +65,21 @@ function createUser(req, res, next) {
 };
 
 function updateProfile(req, res, next) {
+  var activity_id = req.body.activity;
+  var emotion_id = req.body.emotion;
+  var profile_id = req.body.profile_id;
     pg.connect(connectionString, function(err, client, done) {
       if(err) {
         done();
         console.log(err);
         return res.status(500).json({suceess: false, data: err});
       }
-      var query = client.query('INSERT INTO profile (name, activity_id, emotion_id) VALUES ($1, $2, $3)', [name, activity_id, emotion_id], function(err, result) {
+      var query = client.query('UPDATE profile SET emotion_id = ($1), activity_id = ($2) where profile_id = $3;', [emotion_id, activity_id, req.session.user.profile_id], function(err, result) {
         done();
         if(err) {
           return console.error('error running query', err);
         }
+        // console.log('pg console:' + req.session.user.profile_id)
         res.rows = result.rows
         next()
       });
@@ -113,9 +117,7 @@ function showOneProfile(req, res, next) {
         if(err) {
           return console.error('error running query', err);
         }
-        console.log(req.params)
         res.rows = result.rows
-        console.log(res.rows)
         next()
       });
     });

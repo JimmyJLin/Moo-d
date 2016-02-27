@@ -1,5 +1,4 @@
-Helloe!
-<% profileOneData.forEach(function(profile) { %>
+<% profileData.forEach(function(profile) { %>
     <a href="/users/profile/<%= profile.profile_id %>" >
       <div class="thecard">
         <div class="card-caption">
@@ -12,8 +11,11 @@ Helloe!
               <br>
             </p>
           </ul>
+          <form method="POST" action="<%= '?_method=DELETE' %>">
+          <a href="<%=burgerURL + '/edit'%>" class="btn btn-info" role="button">Edit</a>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
         </div>
       </div>
     </a>
   <% }) %>
-bye

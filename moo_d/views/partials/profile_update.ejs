@@ -4,16 +4,9 @@
       <div class="starter-template">
       <form class="form-horizontal" action="/users/profile" method="post">
         <fieldset>
+          <h1>Welcome <%= user.name %></h1>
+        <br>
 
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="name">Profile Name</label>
-          <div class="col-md-6">
-          <input id="name" name="name" type="text" placeholder="profile name" class="form-control input-md" required="">
-          <span class="help-block">Please name your profile name</span>
-          </div>
-        </div>
 
         <!-- Select Basic -->
         <div class="form-group">
