@@ -80,7 +80,8 @@ function updateProfile(req, res, next) {
           return console.error('error running query', err);
         }
         // console.log('pg console:' + req.session.user.profile_id)
-        res.rows = result.rows
+        // console.log('pg req.session: ' + req.session.user.name)
+        res.rows = result.rows[0];
         next()
       });
     });
@@ -112,12 +113,13 @@ function showOneProfile(req, res, next) {
         console.log(err);
         return res.status(500).json({suceess: false, data: err});
       }
-      var query = client.query('select profile.profile_id profile_id, profile.name profile_name, activity.name activity_name, emotion.name emotion_name from profile left join emotion on profile.emotion_id = emotion.emotion_id left join activity on profile.activity_id = activity.activity_id WHERE profile.profile_id = $1;', [req.params.id], function(err, result) {
+      var query = client.query('select profile.profile_id profile_id, profile.name profile_name, activity.name activity_name, emotion.name emotion_name from profile left join emotion on profile.emotion_id = emotion.emotion_id left join activity on profile.activity_id = activity.activity_id WHERE profile.profile_id = $1;', [req.session.user.profile_id], function(err, result) {
         done();
         if(err) {
           return console.error('error running query', err);
         }
-        res.rows = result.rows
+        res.rows = result.rows[0]
+        console.log('pg:' + res.rows);
         next()
       });
     });
