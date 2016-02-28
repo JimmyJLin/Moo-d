@@ -24,31 +24,25 @@ users.route('/showAll')
   })
 
 users.route('/profile')
-  .get(function(req, res){
+  .get(db.showOneProfile, function(req, res){
     res.render('users/profile', {
-      user: req.session.user})
+      user: req.session.user,
+      profileData: res.rows})
   })
 
-  .post(db.updateProfile, function(req, res){
+  .post(db.updateProfile, db.showOneProfile, function(req, res){
     res.render('users/profile', {
-      user: req.session.user})
+      user: req.session.user,
+      profileData: res.rows})
   })
 
 users.route('/profile/update')
   .get(db.showOneProfile, function(req, res){
     res.render('users/updateProfile', {
-      user: req.session.user})
+      user: req.session.user,
+      profileData: res.rows})
   })
 
-//
-// users.route('/profile/:id')
-//   .get(db.showOneProfile, function(req, res){
-//     req.session.user = res.rows;
-//     req.session.save(function(){
-//     res.render('pages/profileOne', {
-//         profileOneData: res.rows})
-//       })
-//   })
 
 users.route('/login')
   .get(function(req, res){
