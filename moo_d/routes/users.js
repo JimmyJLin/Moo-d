@@ -20,6 +20,7 @@ users.route('/signup')
 users.route('/showAll')
   .get(db.showAllProfile, function(req, res){
     res.render('pages/profileAll', {
+      user: req.session.user,
       profileAll: res.rows})
   })
 
