@@ -10,9 +10,29 @@
   <header>
     <%- include ../partials/nav %>
   </header>
-  <h1>Profile Page</h1>
   <br>
-  <%- include ../partials/profile_update %>
+
+  user profile page
+  <% console.log('profile ejs all: ' + user) %>
+  <% console.log('profile ejs profile_id: ' + user.profile_id) %>
+  <% console.log('profile ejs activity_id: ' + user.activity_id) %>
+  <% console.log('profile ejs emotion_id: ' + user.emotion_id) %>
+
+  <a>
+    <div class="thecard">
+      <div class="card-caption">
+        <ul id="res">
+          <p>
+            <li>ProfileId: <%= user.profile_id %></li>
+            <li>Name: <%= user.name %></li>
+            <li>Activity: <%= user.activity_id %></li>
+            <li>Emotion: <%= user.emotion_id %></li>
+            <br>
+          </p>
+        </ul>
+      </div>
+    </div>
+  </a>
 
   <%- include ../partials/footer %>
 
