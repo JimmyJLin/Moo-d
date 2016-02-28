@@ -80,6 +80,7 @@ function updateProfile(req, res, next) {
           return console.error('error running query', err);
         }
         // console.log('pg console:' + req.session.user.profile_id)
+        // console.log('pg req.session: ' + req.session.user.name)
         res.rows = result.rows
         next()
       });

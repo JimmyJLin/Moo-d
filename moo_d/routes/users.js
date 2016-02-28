@@ -14,7 +14,7 @@ users.route('/signup')
   res.render('users/signup');
 })
   .post(db.createUser, function(req, res){
-      res.redirect(303, '/users/profile')
+      res.redirect(303, '/profile')
   })
 
 users.route('/showAll')
@@ -29,9 +29,8 @@ users.route('/profile')
       user: req.session.user})
   })
   .post(db.updateProfile, function(req, res){
-    console.log('updateProfile: ' + res.rows)
-    res.redirect('/users/showAll', {
-      profileData: res.rows})
+    res.render('pages/profileOne', {
+      user: req.session.user})
   })
 
 // users.route('/profile/:id/edit', function(req, res){
@@ -56,7 +55,8 @@ users.route('/login')
   .post(db.loginUser, function(req, res){
     req.session.user = res.rows;
     req.session.save(function(){
-      res.redirect(303, 'users/profile') // need to add profile_id when displaying
+      res.render('users/profile', {
+      user: req.session.user}) // need to add profile_id when displaying
     })
   })
 

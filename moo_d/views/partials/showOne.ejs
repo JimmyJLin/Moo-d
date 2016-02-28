@@ -1,21 +1,21 @@
-<% profileData.forEach(function(profile) { %>
-    <a href="/users/profile/<%= profile.profile_id %>" >
+<% console.log('showOne ejs all: ' + user) %>
+<% console.log('showOne ejs user: ' + user.name) %>
+<% console.log('showOne ejs profile_id: ' + user.profile_id) %>
+<% console.log('showOne ejs activity_id: ' + user.activity_id) %>
+<% console.log('showOne ejs emotion_id: ' + user.emotion_id) %>
+
+    <a href="/users/profile/<%= user.profile_id %>" >
       <div class="thecard">
         <div class="card-caption">
           <ul id="res">
             <p>
-              <li>ProfileId: <%= profile.profile_id %></li>
-              <li>Name: <%= profile.name %></li>
-              <li>Activity: <%= profile.activity_id %></li>
-              <li>Emotion: <%= profile.emotion_id %></li>
+              <li>ProfileId: <%= user.profile_id %></li>
+              <li>Name: <%= user.name %></li>
+              <li>Activity: <%= user.activity_id %></li>
+              <li>Emotion: <%= user.emotion_id %></li>
               <br>
             </p>
           </ul>
-          <form method="POST" action="<%= '?_method=DELETE' %>">
-          <a href="<%=burgerURL + '/edit'%>" class="btn btn-info" role="button">Edit</a>
-          <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
         </div>
       </div>
     </a>
-  <% }) %>
