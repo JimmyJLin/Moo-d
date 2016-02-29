@@ -1,20 +1,8 @@
 var pg = require('pg');
-var connectionString = "postgres://DB_USER:DB_PASS@localhost/DB_NAME";
+var connectionString = "postgres://jimmylin:desertprince69@localhost/moo_d";
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 var session = require('express-session');
-
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
-  var config = process.env.DATABASE_URL;
-} else {
-  var config = {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS
-  }
-}
 
 
 function loginUser(req, res, next) {

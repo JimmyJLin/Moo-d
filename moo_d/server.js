@@ -3,6 +3,7 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var pg = require('pg');
+var connectionString = "postgres://jimmylin:desertprince69@localhost/moo_d";
 var session = require('express-session');
 var pgSession = require('connect-pg-simple')(session);
 var path = require('path');
@@ -11,15 +12,11 @@ var papercut = require('papercut');
 var dotenv = require('dotenv');
 var db = require('./db/pg');
 var app = express();
+var AWS = require('aws-sdk');
 
 var userRoutes = require(path.join(__dirname, '/routes/users'));
+// var profileRoutes = require(path.join(__dirname, '/routes/profile'));
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
-  var config = process.env.DATABASE_URL;
-  var connectionString = "postgres://DB_USER:DB_PASS@localhost/DB_NAME";
-} else {
-  }
-}
 
 // allow express to use session
 app.use(session({
