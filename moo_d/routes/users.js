@@ -14,12 +14,13 @@ users.route('/signup')
   res.render('users/signup');
 })
   .post(db.createUser, function(req, res){
-      res.redirect(303, '/profile')
+      res.redirect('users/updateProfile')
   })
 
 users.route('/showAll')
   .get(db.showAllProfile, function(req, res){
     res.render('pages/profileAll', {
+      user: req.session.user,
       profileAll: res.rows})
   })
 
@@ -64,6 +65,31 @@ users.route('/logout')
     })
   })
 
+users.route('/messages')
+  .post(db.sendMessage, db.showOneProfile, function(req, res){
+    res.render('users/profile',{
+      user: req.session.user,
+      profileData: res.rows})
+  })
 
+// DWS papercut
+users.route('/avatar')
+  .get(function(req, res){
+    res.render('users/avatar')
+  })
+  .post(function(req, res){
+    uploader = new AvatarUploader()
+    res.render('users/avatarresult')
+  })
+// imageId = 0
+// //
+// app.post '/avatar', (req, res)->
+//   uploader = new AvatarUploader()
+//
+//   uploader.process "#{imageId++}", req.files.avatar.path, (err, images)->
+//     res.send 200, """
+//
+//     """
+// end AWS papercut
 
 module.exports = users;

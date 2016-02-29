@@ -8,6 +8,8 @@ var session = require('express-session');
 var pgSession = require('connect-pg-simple')(session);
 var path = require('path');
 var methodOverride = require('method-override');
+var papercut = require('papercut');
+var dotenv = require('dotenv');
 
 var db = require('./db/pg');
 var app = express();
@@ -32,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(morgan('short'));
-
+dotenv.load();
 
 // override with POST having ?_method=xxxx
 app.use(methodOverride('_method'))
@@ -54,6 +56,18 @@ app.get('/', function(req, res){
 
 app.use('/users', userRoutes);
 // app.use('/profiles', profileRoutes)
+
+//paper cut setting
+  papercut.set('storage', 'file')
+  papercut.set('directory', path.join(__dirname, './public/img'))
+  papercut.set('url', '/output')
+  papercut.set('process', 'crop')
+
+  papercut.set('storage', 's3')
+  papercut.set('bucket', 'mood-d')
+  papercut.set('S3_KEY', process.env.S3_KEY)
+  papercut.set('S3_SECRET', process.env.S3_SECRET)
+
 
 // app setting
 var port = process.env.PORT || 3000;
