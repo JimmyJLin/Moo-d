@@ -3,7 +3,6 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var pg = require('pg');
-var connectionString = "postgres://jimmylin:desertprince69@localhost/moo_d";
 var session = require('express-session');
 var pgSession = require('connect-pg-simple')(session);
 var path = require('path');
@@ -17,13 +16,8 @@ var userRoutes = require(path.join(__dirname, '/routes/users'));
 
 if (process.env.ENVIRONMENT === 'PRODUCTION') {
   var config = process.env.DATABASE_URL;
+  var connectionString = "postgres://DB_USER:DB_PASS@localhost/DB_NAME";
 } else {
-  var config = {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS
   }
 }
 
