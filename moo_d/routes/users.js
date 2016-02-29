@@ -2,6 +2,8 @@ var express = require('express');
 var users = express.Router();
 var bodyParser = require('body-parser');
 var db = require('./../db/pg');
+var multiparty = require('multiparty');
+
 
 //new codes
 users.route('/')
@@ -14,7 +16,7 @@ users.route('/signup')
   res.render('users/signup');
 })
   .post(db.createUser, function(req, res){
-      res.redirect('users/updateProfile')
+      res.redirect('/')
   })
 
 users.route('/showAll')
@@ -72,24 +74,7 @@ users.route('/messages')
       profileData: res.rows})
   })
 
-// DWS papercut
-users.route('/avatar')
-  .get(function(req, res){
-    res.render('users/avatar')
-  })
-  .post(function(req, res){
-    uploader = new AvatarUploader()
-    res.render('users/avatarresult')
-  })
-// imageId = 0
-// //
-// app.post '/avatar', (req, res)->
-//   uploader = new AvatarUploader()
-//
-//   uploader.process "#{imageId++}", req.files.avatar.path, (err, images)->
-//     res.send 200, """
-//
-//     """
-// end AWS papercut
+
+
 
 module.exports = users;

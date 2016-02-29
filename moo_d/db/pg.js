@@ -117,7 +117,7 @@ function showOneProfile(req, res, next) {
         if(err) {
           return console.error('error running query', err);
         }
-        res.rows = result.rows[0]
+        res.rows = result.rows
         console.log('pg:' + res.rows);
         next()
       });
@@ -148,7 +148,27 @@ function sendMessage(req, res, next) {
     });
 };
 
-module.exports.sendMessage = sendMessage
+function showMessage(req, res, next) {
+    pg.connect(connectionString, function(err, client, done) {
+      if(err) {
+        done();
+        console.log(err);
+        return res.status(500).json({suceess: false, data: err});
+      }
+      var query = client.query('select profile.profile_id profile_id, profile.name profile_name, activity.name activity_name, emotion.name emotion_name,  messages.receiver_name receiver, messages.message from profile left join emotion on profile.emotion_id = emotion.emotion_id left join activity on profile.activity_id = activity.activity_id left join messages on profile.profile_id = messages.profile_id WHERE profile.profile_id = $1;', [req.session.user.profile_id], function(err, result) {
+        done();
+        if(err) {
+          return console.error('error running query', err);
+        }
+        res.rows = result.rows
+        console.log('pg:' + res.rows);
+        next()
+      });
+    });
+};
+
+module.exports.showMessage = showMessage;
+module.exports.sendMessage = sendMessage;
 module.exports.showOneProfile = showOneProfile;
 module.exports.updateProfile = updateProfile;
 module.exports.showAllProfile = showAllProfile;

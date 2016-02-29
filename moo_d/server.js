@@ -10,12 +10,50 @@ var path = require('path');
 var methodOverride = require('method-override');
 var papercut = require('papercut');
 var dotenv = require('dotenv');
-
 var db = require('./db/pg');
 var app = express();
+var AWS = require('aws-sdk');
 
 var userRoutes = require(path.join(__dirname, '/routes/users'));
 // var profileRoutes = require(path.join(__dirname, '/routes/profile'));
+
+// var client = s3.createClient({
+//   maxAsyncS3: 20,     // this is the default
+// s3RetryCount: 3,    // this is the default
+// s3RetryDelay: 1000, // this is the default
+// multipartUploadThreshold: 20971520, // this is the default (20 MB)
+// multipartUploadSize: 15728640, // this is the default (15 MB)
+// s3Options: {
+//   accessKeyId: "AKIAJX7NX5Z2GD5EF4NA",
+//   secretAccessKey: "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",
+//   region: "N. Virginia",
+//   },
+// })
+
+// var s3 = new AWS.S3();
+//  s3.createBucket({Bucket: 'myBucket'}, function() {
+//   var params = {Bucket: 'myBucket', Key: 'AKIAJX7NX5Z2GD5EF4NA', Body: 'Hello!'};
+//   s3.putObject(params, function(err, data) {
+//       if (err)
+//           console.log(err)
+//       else       console.log("Successfully uploaded data to myBucket/myKey");
+//    });
+// });
+
+// AWS.config.update({
+//     accessKeyId: "AKIAJX7NX5Z2GD5EF4NA",
+//     secretAccessKey: "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",
+//     "region": "Oregon"
+// });
+// AWS.config.loadFromPath('/aws/AwsConfig.json');
+// AWS.config = new AWS.Config();
+// AWS.config.accessKeyId = "AKIAJX7NX5Z2GD5EF4NA";
+// AWS.config.secretAccessKey = "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";
+// AWS.config.region = "us-east-1";
+// AWS.config.endpoint = "storagegateway.us-east-1.amazonaws.com";
+// AWS.config.credentials = "credentials";
+
+
 
 // allow express to use session
 app.use(session({
@@ -57,16 +95,6 @@ app.get('/', function(req, res){
 app.use('/users', userRoutes);
 // app.use('/profiles', profileRoutes)
 
-//paper cut setting
-  papercut.set('storage', 'file')
-  papercut.set('directory', path.join(__dirname, './public/img'))
-  papercut.set('url', '/output')
-  papercut.set('process', 'crop')
-
-  papercut.set('storage', 's3')
-  papercut.set('bucket', 'mood-d')
-  papercut.set('S3_KEY', process.env.S3_KEY)
-  papercut.set('S3_SECRET', process.env.S3_SECRET)
 
 
 // app setting
