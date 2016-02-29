@@ -12,48 +12,20 @@ var papercut = require('papercut');
 var dotenv = require('dotenv');
 var db = require('./db/pg');
 var app = express();
-var AWS = require('aws-sdk');
 
 var userRoutes = require(path.join(__dirname, '/routes/users'));
-// var profileRoutes = require(path.join(__dirname, '/routes/profile'));
 
-// var client = s3.createClient({
-//   maxAsyncS3: 20,     // this is the default
-// s3RetryCount: 3,    // this is the default
-// s3RetryDelay: 1000, // this is the default
-// multipartUploadThreshold: 20971520, // this is the default (20 MB)
-// multipartUploadSize: 15728640, // this is the default (15 MB)
-// s3Options: {
-//   accessKeyId: "AKIAJX7NX5Z2GD5EF4NA",
-//   secretAccessKey: "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",
-//   region: "N. Virginia",
-//   },
-// })
-
-// var s3 = new AWS.S3();
-//  s3.createBucket({Bucket: 'myBucket'}, function() {
-//   var params = {Bucket: 'myBucket', Key: 'AKIAJX7NX5Z2GD5EF4NA', Body: 'Hello!'};
-//   s3.putObject(params, function(err, data) {
-//       if (err)
-//           console.log(err)
-//       else       console.log("Successfully uploaded data to myBucket/myKey");
-//    });
-// });
-
-// AWS.config.update({
-//     accessKeyId: "AKIAJX7NX5Z2GD5EF4NA",
-//     secretAccessKey: "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",
-//     "region": "Oregon"
-// });
-// AWS.config.loadFromPath('/aws/AwsConfig.json');
-// AWS.config = new AWS.Config();
-// AWS.config.accessKeyId = "AKIAJX7NX5Z2GD5EF4NA";
-// AWS.config.secretAccessKey = "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";
-// AWS.config.region = "us-east-1";
-// AWS.config.endpoint = "storagegateway.us-east-1.amazonaws.com";
-// AWS.config.credentials = "credentials";
-
-
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
+  var config = process.env.DATABASE_URL;
+} else {
+  var config = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS
+  }
+}
 
 // allow express to use session
 app.use(session({
