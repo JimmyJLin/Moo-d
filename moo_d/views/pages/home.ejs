@@ -6,17 +6,20 @@
   <%- include ../partials/head %>
 
 </head>
-<body>
+<body id="frontpage" background='/img/frontpage.jpg'>
   <header>
     <%- include ../partials/homenav %>
   </header>
-  <div class="button-template">
-    <a href="/users/signup" class="btn btn-primary">Signup</a>
-  </div>
-  <div class="button-template">
-    <a href="/users/login" class="btn btn-success">Login</a>
-  </div>
-
+  <br>
+  <br>
+    <div class="container">
+      <div class="button-template">
+        <a href="/users/signup" class="btn btn-lg btn-primary"><span class="signup"></span>Signup</a>
+      </div>
+      <div class="button-template">
+        <a href="/users/login" class="btn btn-lg btn-success"><span class="login"></span>Login</a>
+      </div>
+    </div>
   <div>
   </div>
   <%- include ../partials/footer %>

@@ -1,13 +1,11 @@
-
+<div class="containter">
 <% profileAll.forEach(function(profile) { %>
-  <% console.log('showAll ejs all: ' + profile.profile_id) %>
     <a>
       <div class="thecard">
         <div class="card-caption">
           <ul id="res">
             <p>
-              <li>ProfileId: <%= profile.profile_id %></li>
-              <li>Name: <%= profile.profile_name %></li>
+              <li><%= profile.profile_name %></li>
               <li>Activity: <%= profile.activity_name %></li>
               <li>Emotion: <%= profile.emotion_name %></li>
               <br>
@@ -35,3 +33,4 @@
       </div>
     </a>
   <% }) %>
+  </div>
