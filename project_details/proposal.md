@@ -21,3 +21,5 @@ App where user can create and share their current activity and emotional states 
   * As a user I should be able to sent like or message to another user
 
   * As a user I should be able to see what other user's like or message
+
+##### Technical Challenge

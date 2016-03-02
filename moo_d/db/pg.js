@@ -1,5 +1,6 @@
 var pg = require('pg');
-var connectionString = "postgres://jimmylin:desertprince69@localhost/moo_d";
+var connectionString = "postgres://"+DB_USER+":"+DB_PASSWORD+"@localhost/"+DB_NAME;
+
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 var session = require('express-session');
